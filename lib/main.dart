@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trying_bloc_increment_decremen/presentation/router/app_router.dart';
 
-import './cubit/counter_cubit.dart';
-
-import 'screens/home/home_screen.dart';
-
+import './logic/cubit/counter_cubit.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  AppRouter _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<CounterCubit>(
       create: (context) => CounterCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: HomeScreen(),
+        onGenerateRoute: _appRouter.onGenerateRoute,
+        initialRoute: '/',
       ),
     );
   }
